@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Boldog 0,5. Évfordulót!</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 40px;
+      background-color: #d2b48c;
+      background-image: url('https://www.transparenttextures.com/patterns/wood-pattern.png');
+      font-family: 'Courier New', Courier, monospace;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 30px;
+      min-height: 100vh;
+    }
+
+    .polaroid {
+      background: #fff;
+      padding: 15px 15px 40px 15px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+      cursor: pointer;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      width: 220px;
+      text-align: center;
+      position: relative;
+    }
+
+    .polaroid:hover {
+      transform: scale(1.05) !important;
+      box-shadow: 0 10px 20px rgba(0,0,0,0.4);
+      z-index: 10;
+    }
+
+    .polaroid img {
+      width: 100%;
+      height: 220px;
+      object-fit: cover;
+      background-color: #eee;
+    }
+
+    .tape {
+      position: absolute;
+      top: -12px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 90px;
+      height: 30px;
+      background: rgba(255, 255, 255, 0.4);
+      border: 1px solid rgba(0,0,0,0.1);
+      box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+      z-index: 2;
+    }
+
+    .polaroid-title {
+      margin-top: 15px;
+      font-size: 1.2rem;
+      font-weight: bold;
+      color: #333;
+    }
+
+    .polaroid:nth-child(even) { transform: rotate(4deg); }
+    .polaroid:nth-child(odd) { transform: rotate(-5deg); }
+    .polaroid:nth-child(3n) { transform: rotate(7deg); }
+    .polaroid:nth-child(5n) { transform: rotate(-6deg); }
+
+    #overlay {
+      position: fixed;
+      top: 0; left: 0; width: 100%; height: 100%;
+      background: rgba(0,0,0,0.85);
+      display: none;
+      justify-content: center;
+      align-items: center;
+      z-index: 100;
+      opacity: 0;
+      transition: opacity 0.4s ease;
+      padding: 20px;
+      box-sizing: border-box;
+    }
+
+    .zoomed-card {
+      background: #fff;
+      padding: 20px;
+      max-width: 500px;
+      width: 100%;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.6);
+      text-align: center;
+      position: relative;
+      border-radius: 4px;
+    }
+
+    .zoomed-card img {
+      width: 100%;
+      max-height: 50vh;
+      object-fit: contain;
+    }
+
+    .zoomed-text {
+      margin-top: 25px;
+      font-size: 1.1rem;
+      line-height: 1.5;
+      font-family: 'Comic Sans MS', cursive, sans-serif;
+      color: #222;
+    }
+
+    .back-btn {
+      margin-top: 25px;
+      padding: 10px 20px;
+      background: #c28e6c;
+      color: #fff;
+      border: none;
+      cursor: pointer;
+      font-size: 1rem;
+      border-radius: 20px;
+      font-family: 'Courier New', Courier, monospace;
+      font-weight: bold;
+      transition: background 0.2s;
+    }
+
+    .back-btn:hover {
+      background: #a37252;
+    }
+  </style>
+</head>
+<body>
+
+  <div id="overlay">
+    <div class="zoomed-card">
+      <img id="zoomed-img" src="" alt="Memory">
+      <div id="zoomed-text" class="zoomed-text"></div>
+      <button class="back-btn" onclick="closePolaroid()">Vissza</button>
+    </div>
+  </div>
+
+  <div id="table-container" style="display: flex; flex-wrap: wrap; justify-content: center; gap: 30px; width: 100%; max-width: 1200px;"></div>
+
+  <script>
+    const memories = [
+      { img: '1.jpeg', text: 'Elso tali<3 nagyon peak first impression xD' },
+      { img: '2.jpeg', text: 'Hihihi>:) Muszáj volt beletennem… nem tudtam megállni… srry not srry Első randink:) ami amugy lowk nem is volt az… Faszom Réka hogy hamarabb jött>:(' },
+      { img: '3.jpeg', text: 'Na most mar fr az elso randi jon;) #pirex addiction EL NEM TUDOD HINNI MENNYIRE ORULTEM HOGY ELSZAKADT AZ A GATYA Dori meg Szofi nagyot clutcholtak' },
+      { img: '4.jpeg', text: 'Hu de szeretem ezt a kepet. Nagyon sokaig ez volt a favourite<3 naon peak' },
+      { img: '5.jpeg', text: 'Igazabol itt nincs semmi konkret ok… azon kivul hogy kar ofc' },
+      { img: '6.jpeg', text: 'Ez egy peak selfie rolad a stalkered mondjuk lowk para… sztem jelentsd fel xD a girlfreind effect just saying' },
+      { img: '7.jpeg', text: 'cookinggg sztem nagyon nyomtuk a kiralyi tobbesszam xD' },
+      { img: '8.jpeg', text: 'Szep a szemed. ennyi tbh' },
+      { img: '9.jpeg', text: 'elso meet a sulis rossz zsarukkal (freind groupommal) De one of the girlies lettel' },
+      { img: '10.jpeg', text: 'Nezd ma’ milyen distinguished gentleman;) Hell lye erettsegi' },
+      { img: '11.jpeg', text: 'Azon kiegtem hogy ezt mennyien lattak a csaladodbol a facebook miatt… de nagyon smeggsyk vagyunk' },
+      { img: '12.jpeg', text: 'BRIIIINGGG MEEEE THEEE HORIZOOON peak koncert' },
+      { img: '13.jpeg', text: 'Csaladi nyaralas xD Tudod hogy mennyire szeretem ezt a kepet… muszaj volt:)' },
+      { img: '14.jpg', text: 'Boldog 0,5. evfordulot<333' }
+    ];
+
+    const container = document.getElementById('table-container');
+
+    memories.forEach((memory, index) => {
+      const polaroid = document.createElement('div');
+      polaroid.className = 'polaroid';
+      
+      const tape = document.createElement('div');
+      tape.className = 'tape';
+      polaroid.appendChild(tape);
+
+      const img = document.createElement('img');
+      img.src = memory.img;
+      polaroid.appendChild(img);
+
+      const title = document.createElement('div');
+      title.className = 'polaroid-title';
+      title.innerText = "#" + (index + 1);
+      polaroid.appendChild(title);
+
+      polaroid.onclick = () => openPolaroid(memory.img, memory.text);
+      container.appendChild(polaroid);
+    });
+
+    function openPolaroid(imgSrc, text) {
+      document.getElementById('zoomed-img').src = imgSrc;
+      document.getElementById('zoomed-text').innerText = text;
+      
+      const overlay = document.getElementById('overlay');
+      overlay.style.display = 'flex';
+      setTimeout(() => {
+        overlay.style.opacity = '1';
+      }, 10);
+    }
+
+    function closePolaroid() {
+      const overlay = document.getElementById('overlay');
+      overlay.style.opacity = '0';
+      setTimeout(() => {
+        overlay.style.display = 'none';
+      }, 400); 
+    }
+
+    document.getElementById('overlay').addEventListener('click', function(e) {
+      if (e.target === this) {
+        closePolaroid();
+      }
+    });
+  </script>
+</body>
+</html>
