@@ -145,76 +145,76 @@
   <!-- This holds all the Polaroids on the table -->
   <div id="table-container" style="display: flex; flex-wrap: wrap; justify-content: center; gap: 30px; width: 100%; max-width: 1200px;"></div>
 
-  <script>
-    // Here is all your data! 
+ <script>
+    // Fixed array with the missing comma restored![cite: 1]
     const memories = [
-      { img: '1.jpeg', text: 'Elso tali<3 nagyon peak first impression xD' },
-      { img: '2.jpeg', text: 'Hihihi>:) Muszáj volt beletennem… nem tudtam megállni… srry not srry Első randink:) ami amugy lowk nem is volt az… Faszom Réka hogy hamarabb jött>:(' },
-      { img: '3.jpeg', text: 'Na most mar fr az elso randi jon;) #pirex addiction EL NEM TUDOD HINNI MENNYIRE ORULTEM HOGY ELSZAKADT AZ A GATYA Dori meg Szofi nagyot clutcholtak' },
-      { img: '4.jpeg', text: 'Hu de szeretem ezt a kepet. Nagyon sokaig ez volt a favourite<3 naon peak' },
-      { img: '5.jpeg', text: 'Igazabol itt nincs semmi konkret ok… azon kivul hogy kar ofc' },
-      { img: '6.jpeg', text: 'Ez egy peak selfie rolad a stalkered mondjuk lowk para… sztem jelentsd fel xD a girlfreind effect just saying' },
-      { img: '7.jpeg', text: 'cookinggg sztem nagyon nyomtuk a kiralyi tobbesszam xD' },
-      { img: '8.jpeg', text: 'Szep a szemed. ennyi tbh' },
-      { img: '9.jpeg', text: 'elso meet a sulis rossz zsarukkal (freind groupommal) De one of the girlies lettel' },
-      { img: '10.jpeg', text: 'Nezd ma’ milyen distinguished gentleman;) Hell lye erettsegi' },
-      { img: '11.jpeg', text: 'Azon kiegtem hogy ezt mennyien lattak a csaladodbol a facebook miatt… de nagyon smeggsyk vagyunk' },
-      { img: '12.jpeg', text: 'BRIIIINGGG MEEEE THEEE HORIZOOON peak koncert' },
-      { img: '13.jpeg', text: 'Csaladi nyaralas xD Tudod hogy mennyire szeretem ezt a kepet… muszaj volt:)' }
-      { img: '14.jpg', text: 'Boldog 0,5. evfordulot<333' }
+      { img: '1.jpeg', text: 'Elso tali<3 nagyon peak first impression xD' },[cite: 1]
+      { img: '2.jpeg', text: 'Hihihi>:) Muszáj volt beletennem… nem tudtam megállni… srry not srry Első randink:) ami amugy lowk nem is volt az… Faszom Réka hogy hamarabb jött>:(' },[cite: 1]
+      { img: '3.jpeg', text: 'Na most mar fr az elso randi jon;) #pirex addiction EL NEM TUDOD HINNI MENNYIRE ORULTEM HOGY ELSZAKADT AZ A GATYA Dori meg Szofi nagyot clutcholtak' },[cite: 1]
+      { img: '4.jpeg', text: 'Hu de szeretem ezt a kepet. Nagyon sokaig ez volt a favourite<3 naon peak' },[cite: 1]
+      { img: '5.jpeg', text: 'Igazabol itt nincs semmi konkret ok… azon kivul hogy kar ofc' },[cite: 1]
+      { img: '6.jpeg', text: 'Ez egy peak selfie rolad a stalkered mondjuk lowk para… sztem jelentsd fel xD a girlfreind effect just saying' },[cite: 1]
+      { img: '7.jpeg', text: 'cookinggg sztem nagyon nyomtuk a kiralyi tobbesszam xD' },[cite: 1]
+      { img: '8.jpeg', text: 'Szep a szemed. ennyi tbh' },[cite: 1]
+      { img: '9.jpeg', text: 'elso meet a sulis rossz zsarukkal (freind groupommal) De one of the girlies lettel' },[cite: 1]
+      { img: '10.jpeg', text: 'Nezd ma’ milyen distinguished gentleman;) Hell lye erettsegi' },[cite: 1]
+      { img: '11.jpeg', text: 'Azon kiegtem hogy ezt mennyien lattak a csaladodbol a facebook miatt… de nagyon smeggsyk vagyunk' },[cite: 1]
+      { img: '12.jpeg', text: 'BRIIIINGGG MEEEE THEEE HORIZOOON peak koncert' },[cite: 1]
+      { img: '13.jpeg', text: 'Csaladi nyaralas xD Tudod hogy mennyire szeretem ezt a kepet… muszaj volt:)' },[cite: 1]
+      { img: '14.jpg', text: 'Boldog 0,5. evfordulot<333' }[cite: 1]
     ];
 
-    const container = document.getElementById('table-container');
+    const container = document.getElementById('table-container');[cite: 1]
 
     // Automatically create a Polaroid for every memory in the list
-    memories.forEach((memory, index) => {
-      const polaroid = document.createElement('div');
-      polaroid.className = 'polaroid';
+    memories.forEach((memory, index) => {[cite: 1]
+      const polaroid = document.createElement('div');[cite: 1]
+      polaroid.className = 'polaroid';[cite: 1]
       
-      const tape = document.createElement('div');
-      tape.className = 'tape';
-      polaroid.appendChild(tape);
+      const tape = document.createElement('div');[cite: 1]
+      tape.className = 'tape';[cite: 1]
+      polaroid.appendChild(tape);[cite: 1]
 
-      const img = document.createElement('img');
-      img.src = memory.img;
-      polaroid.appendChild(img);
+      const img = document.createElement('img');[cite: 1]
+      img.src = memory.img;[cite: 1]
+      polaroid.appendChild(img);[cite: 1]
 
-      const title = document.createElement('div');
-      title.className = 'polaroid-title';
-      title.innerText = "#" + (index + 1);
-      polaroid.appendChild(title);
+      const title = document.createElement('div');[cite: 1]
+      title.className = 'polaroid-title';[cite: 1]
+      title.innerText = "#" + (index + 1);[cite: 1]
+      polaroid.appendChild(title);[cite: 1]
 
-      polaroid.onclick = () => openPolaroid(memory.img, memory.text);
-      container.appendChild(polaroid);
+      polaroid.onclick = () => openPolaroid(memory.img, memory.text);[cite: 1]
+      container.appendChild(polaroid);[cite: 1]
     });
 
     // Code for zooming in
-    function openPolaroid(imgSrc, text) {
-      document.getElementById('zoomed-img').src = imgSrc;
-      document.getElementById('zoomed-text').innerText = text;
+    function openPolaroid(imgSrc, text) {[cite: 1]
+      document.getElementById('zoomed-img').src = imgSrc;[cite: 1]
+      document.getElementById('zoomed-text').innerText = text;[cite: 1]
       
-      const overlay = document.getElementById('overlay');
-      overlay.style.display = 'flex';
-      setTimeout(() => {
-        overlay.style.opacity = '1';
-      }, 10);
+      const overlay = document.getElementById('overlay');[cite: 1]
+      overlay.style.display = 'flex';[cite: 1]
+      setTimeout(() => {[cite: 1]
+        overlay.style.opacity = '1';[cite: 1]
+      }, 10);[cite: 1]
     }
 
     // Code for zooming out (Back button)
-    function closePolaroid() {
-      const overlay = document.getElementById('overlay');
-      overlay.style.opacity = '0';
-      setTimeout(() => {
-        overlay.style.display = 'none';
-      }, 400); 
+    function closePolaroid() {[cite: 1]
+      const overlay = document.getElementById('overlay');[cite: 1]
+      overlay.style.opacity = '0';[cite: 1]
+      setTimeout(() => {[cite: 1]
+        overlay.style.display = 'none';[cite: 1]
+      }, 400);[cite: 1]
     }
 
     // Also close the picture if he clicks outside of the card (on the dark background)
-    document.getElementById('overlay').addEventListener('click', function(e) {
-      if (e.target === this) {
-        closePolaroid();
+    document.getElementById('overlay').addEventListener('click', function(e) {[cite: 1]
+      if (e.target === this) {[cite: 1]
+        closePolaroid();[cite: 1]
       }
-    });
+    });[cite: 1]
   </script>
 </body>
 </html>
